@@ -43,4 +43,7 @@
 ## db-[99:101]-node.example.com
 
 [hostserver]
-127.0.0.1
+202.60.10.213
+
+[hostserver:vars]
+ansible_user=ubuntu

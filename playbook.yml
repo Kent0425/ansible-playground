@@ -1,7 +1,7 @@
 ---
 - name: Playbook to Update Debian security packages, upgrade packages, download Docker, and build docker image for Wordpress
-  hosts: all
-  become: yes
+  hosts: hostserver
+  become: true
   gather_facts: False
 
   tasks:
@@ -10,10 +10,20 @@
         update_cache: yes
         force_apt_get: yes
         cache_valid_time: 3600
+
     - name: Upgrade all packages on servers
       apt:
         upgrade: dist
         force_apt_get: yes
+
+    - name: Install unattended-upgrades on Ubuntu server
+      apt:
+        name:
+          [
+            unattended-upgrades
+          ]
+        update_cache: yes
+
     - name: Install prerequisites for Docker repository
       apt:
         name:
@@ -46,3 +56,32 @@
     - name: Install docker-compose
       pip:
         name: docker-compose
+        
+    - name: Build MariaDB server
+      docker_container:
+        image: mariadb
+        name: mariadb
+        volumes:
+          - "{{db_volume}}:/var/lib/mysql"
+        env:
+          MYSQL_ROOT_PASSWORD: samplerootpass
+          MYSQL_PASSWORD: samplepass
+          MYSQL_DATABASE: db
+          MYSQL_USER: sampleuser
+
+    - name: Build WordPress
+      docker_container:
+        image: wordpress
+        name: wordpress
+        restart_policy: always
+        ports:
+          - "8080:80"
+        links:
+          - "{{db_volume}}:/var/lib/mysql"
+        volumes:
+          - "{{wordpress}}:/var/www/html"
+        env:
+          MYSQL_PASSWORD: samplepass
+          MYSQL_DATABASE: db
+          MYSQL_USER: sampleuser
+          MYSQL_HOST: mariadb
