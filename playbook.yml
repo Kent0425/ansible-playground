@@ -72,7 +72,7 @@
         image: mariadb
         name: mariadb
         volumes:
-          - "{{db_volume}}:/var/lib/mysql"
+          - "/var/lib/mysql"
         env:
           MYSQL_ROOT_PASSWORD: samplerootpass
           MYSQL_PASSWORD: samplepass
@@ -87,9 +87,9 @@
         ports:
           - "8080:80"
         links:
-          - "{{db_volume}}:/var/lib/mysql"
+          - "/var/lib/mysql"
         volumes:
-          - "{{wordpress}}:/var/www/html"
+          - "/var/www/html"
         env:
           MYSQL_PASSWORD: samplepass
           MYSQL_DATABASE: db
