@@ -90,7 +90,7 @@
         ports:
           - "8080:80"
         links:
-          - "/var/lib/mysql"
+          - "mariadb:/var/lib/mysql"
         volumes:
           - "/var/www/html"
         env:
