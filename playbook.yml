@@ -52,9 +52,10 @@
     # - name: Install Docker
     #   ansible.builtin.shell: cd ~ && curl -fsSL https://get.docker.com -o get-docker.sh && sudo sh get-docker.sh
 
-    # - name: Install prerequisites for docker-compose
-    #   apt:
-    #     name: ["python3-pip", "python3-setuptools", "virtualenv"]
+    - name: Install prerequisites for docker-compose
+      apt:
+        name: ["python3-pip", "python3-setuptools", "virtualenv"]
+      update_cache: yes
 
     # - name: Install docker-compose
     #   pip:
