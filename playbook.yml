@@ -33,6 +33,7 @@
             "curl",
             "gnupg2",
             "software-properties-common",
+            "python-docker"
           ]
         update_cache: yes
 
@@ -60,6 +61,7 @@
     # - name: Install docker-compose
     #   pip:
     #     name: docker-compose
+    #     update_cache: yes
 
     - name: Install docker-compose from official github repo
       remote_user: ansible_ubuntu_demo
