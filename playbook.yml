@@ -75,7 +75,7 @@
         image: mariadb
         name: mariadb
         volumes:
-          - "/var/lib/mysql"
+          - "mariadb:/var/lib/mysql"
         env:
           MYSQL_ROOT_PASSWORD: samplerootpass
           MYSQL_PASSWORD: samplepass
@@ -92,7 +92,7 @@
         links:
           - "mariadb:/var/lib/mysql"
         volumes:
-          - "/var/www/html"
+          - "wordpress:/var/www/html"
         env:
           MYSQL_PASSWORD: samplepass
           MYSQL_DATABASE: db
