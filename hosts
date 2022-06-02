@@ -49,3 +49,4 @@
 ansible_user=ubuntu
 ansible_password=
 ansible_become_password=
+ansible_python_interpreter=/usr/lib/python2.7/dist-packages/ansible
