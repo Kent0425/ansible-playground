@@ -42,12 +42,15 @@
 
     - name: Add Docker APT repository
       apt_repository:
-        repo: deb [arch=amd64] https://download.docker.com/{{ ansible_system | lower }}/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} stable
+        repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable
 
     - name: Install Docker CE
       apt:
         name: ["docker-ce", "docker-ce-cli", "containerd.io"]
         update_cache: yes
+
+    # - name: Install Docker
+    #   ansible.builtin.shell: cd ~ && curl -fsSL https://get.docker.com -o get-docker.sh && sudo sh get-docker.sh
 
     - name: Install prerequisites for docker-compose
       apt:

@@ -47,3 +47,5 @@
 
 [hostserver:vars]
 ansible_user=ubuntu
+ansible_password=
+ansible_become_password=
