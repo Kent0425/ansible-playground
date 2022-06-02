@@ -33,7 +33,7 @@
             "curl",
             "gnupg2",
             "software-properties-common",
-            "python-docker"
+            "python3-docker"
           ]
         update_cache: yes
 
